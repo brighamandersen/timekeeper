@@ -1,20 +1,24 @@
-const currentPgH1 = document.querySelector('.current-pg-text');
+const countdownTab = document.querySelector('.countdown-tab');
+const stopwatchTab = document.querySelector('.stopwatch-tab');
 const timeH1 = document.querySelector('.time');
-const togglePauseBtn = document.querySelector('.toggle-pause-btn');
+const pauseBtn = document.querySelector('.pause-btn');
+const resetBtn = document.querySelector('.reset-btn');
 
 let secondsElapsed = 0;
 let isPaused = true;
 
 function goToCountdown() {
   document.title = "Countdown";
-  currentPgH1.textContent = "Countdown";
   resetStopwatch();
+  stopwatchTab.classList.remove('is-active');
+  countdownTab.classList.add('is-active');
 }
 
 function goToStopwatch() {
   document.title = "Stopwatch";
-  currentPgH1.textContent = "Stopwatch";
   resetStopwatch();
+  countdownTab.classList.remove('is-active');
+  stopwatchTab.classList.add('is-active');
 }
 
 // Ongoing process in background that will increment seconds when enabled
@@ -28,14 +32,19 @@ setInterval(() => {
 function togglePause() {
   isPaused = !isPaused;
 
-  isPaused ? 
-    togglePauseBtn.textContent = "Resume" 
-    : togglePauseBtn.textContent = "Pause";
+  if (isPaused) {
+    pauseBtn.textContent = "Resume";
+    darkenPauseBtn();
+  } else {
+    pauseBtn.textContent = "Pause";
+    lightenPauseBtn();
+  }
 }
 
 function resetStopwatch() {
   isPaused = true;
-  togglePauseBtn.textContent = "Start";
+  pauseBtn.textContent = "Start";
+  darkenPauseBtn();
   secondsElapsed = 0;
   renderTimeDisplay();
 }
@@ -48,5 +57,13 @@ function secondsNumToHmsStr() {
 function renderTimeDisplay() {
   const timeStr = secondsNumToHmsStr(secondsElapsed);
   timeH1.textContent = timeStr;
-  document.title = timeStr + ' (Stopwatch)';
+  document.title = timeStr;
+}
+
+function lightenPauseBtn() {
+  pauseBtn.classList.add('is-outlined', 'is-light');
+}
+
+function darkenPauseBtn() {
+  pauseBtn.classList.remove('is-outlined', 'is-light');
 }

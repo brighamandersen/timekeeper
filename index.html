@@ -5,29 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TimeKeeper</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+      integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <h1>TimeKeeper</h1>
-    <div class="navbar">
-      <button onClick="goToCountdown()">
-        <h3 class="nav-item">Countdown</h3>
-      </button>
-      <button onClick="goToStopwatch()">
-        <h3 class="nav-item">Stopwatch</h3>
-      </button>
+    <h1 class="title is-1 p-4">TimeKeeper</h1>
+    <div class="tabs is-centered">
+      <ul>
+        <li class="countdown-tab is-active">
+          <a onclick="goToCountdown()">
+            <span class="icon is-small"
+              ><i class="fas fa-hourglass-end"></i
+            ></span>
+            <span>Countdown</span>
+          </a>
+        </li>
+        <li class="stopwatch-tab">
+          <a onclick="goToStopwatch()">
+            <span class="icon is-small"><i class="fas fa-stopwatch"></i></span>
+            <span>Stopwatch</span>
+          </a>
+        </li>
+      </ul>
     </div>
-    <div>
-      <h2>Current page is <span class="current-pg-text">Countdown</span></h2>
+    <div
+      class="content is-flex is-flex-direction-column is-align-items-center m-5"
+    >
+      <div class="display">
+        <h1 class="time subtitle is-1">00:00:00</h1>
+      </div>
+      <div class="control-btns buttons are-medium">
+        <button class="pause-btn button is-primary" onClick="togglePause()">
+          Start
+        </button>
+        <button
+          class="reset-btn button is-danger is-light is-outlined"
+          onClick="resetStopwatch()"
+        >
+          Reset
+        </button>
+      </div>
+      <div class="keypad"></div>
     </div>
-    <div class="display">
-      <h1 class="time">00:00:00</h1>
-    </div>
-    <div class="control-btns">
-      <button class="toggle-pause-btn" onClick="togglePause()">Start</button>
-      <button onClick="resetStopwatch()">Reset</button>
-    </div>
-    <div class="keypad"></div>
   </body>
 </html>
