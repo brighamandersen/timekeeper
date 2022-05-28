@@ -42,20 +42,74 @@
       class="content is-flex is-flex-direction-column is-align-items-center m-5"
     >
       <div class="display">
-        <h1 class="time subtitle is-1">00:00:00</h1>
+        <h1 class="time subtitle is-1 has-text-grey-lighter">00:00:00</h1>
       </div>
       <div class="control-btns buttons are-medium">
-        <button class="pause-btn button is-primary" onClick="togglePause()">
+        <button class="pause-btn button is-primary" onclick="togglePause()">
           Start
         </button>
         <button
           class="reset-btn button is-danger is-light is-outlined"
-          onClick="resetStopwatch()"
+          onclick="resetStopwatch()"
         >
           Reset
         </button>
       </div>
-      <div class="keypad"></div>
+      <div class="keypad">
+        <div class="hours-entry" on>
+          <h4>Hours</h4>
+          <button onclick="onHoursChange(-1)">-1</button>
+          <button onclick="onHoursChange(1)">+1</button>
+        </div>
+        <div class="minutes-entry">
+          <h4>Minutes</h4>
+          <button onclick="onMinutesChange(-10)">-10</button>
+          <button onclick="onMinutesChange(-5)">-5</button>
+          <button onclick="onMinutesChange(-1)">-1</button>
+          <button onclick="onMinutesChange(1)">+1</button>
+          <button onclick="onMinutesChange(5)">+5</button>
+          <button onclick="onMinutesChange(10)">+10</button>
+        </div>
+        <div class="seconds-entry">
+          <h4>Seconds</h4>
+          <button onclick="onSecondsChange(-10)">-10</button>
+          <button onclick="onSecondsChange(-5)">-5</button>
+          <button onclick="onSecondsChange(-1)">-1</button>
+          <button onclick="onSecondsChange(1)">+1</button>
+          <button onclick="onSecondsChange(5)">+5</button>
+          <button onclick="onSecondsChange(10)">+10</button>
+        </div>
+        <input
+          type="number"
+          id="hours"
+          name="hours"
+          min="0"
+          max="23"
+          step="1"
+          value="0"
+        />
+        <span>h</span>
+        <input
+          type="number"
+          id="minutes"
+          name="minutes"
+          min="0"
+          max="59"
+          step="1"
+          value="5"
+        />
+        <span>m</span>
+        <input
+          type="number"
+          id="seconds"
+          name="seconds"
+          min="0"
+          max="59"
+          step="1"
+          value="0"
+        />
+        <span>s</span>
+      </div>
     </div>
   </body>
 </html>
