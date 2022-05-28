@@ -13,5 +13,6 @@ export function secondsToDisplayStr(seconds) {
   const minStr = fullDateStr.substring(14,16);
   const secStr = fullDateStr.substring(17,19);
   return `${hourStr}h ${minStr}m ${secStr}s`
+  // Old hour string below
   // return new Date(timeInSec * 1000).toISOString()//.substring(11, 19);
 }

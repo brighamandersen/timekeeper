@@ -1,7 +1,13 @@
 <script>
-  import { secondsToDisplayStr } from "./timeHelpers";
-  import { MIN_TIME, ONE_SEC_IN_MS, MAX_TIME, FIVE_MIN } from "./constants";
+  import {
+    secondsToDisplayStr,
+    hoursToSeconds,
+    minutesToSeconds,
+  } from "./timeHelpers";
+  import { MIN_TIME, ONE_SEC_IN_MS, FIVE_MIN } from "./constants";
   import { onMount } from "svelte";
+
+  const MIN_SEC_INCREMENTS = [-10, -5, -1, 1, 5, 10];
 
   let timeInSec;
   let isPaused;
@@ -37,6 +43,21 @@
     timeInSec = FIVE_MIN;
     isPaused = true;
   }
+
+  function adjustHours(amount) {
+    timeInSec += hoursToSeconds(amount);
+    if (timeInSec < MIN_TIME) timeInSec = MIN_TIME;
+  }
+
+  function adjustMinutes(amount) {
+    timeInSec += minutesToSeconds(amount);
+    if (timeInSec < MIN_TIME) timeInSec = MIN_TIME;
+  }
+
+  function adjustSeconds(amount) {
+    timeInSec += amount;
+    if (timeInSec < MIN_TIME) timeInSec = MIN_TIME;
+  }
 </script>
 
 <svelte:head>
@@ -58,29 +79,40 @@
     Reset
   </button>
 </div>
-
 <div class="keypad">
-  <div class="hours-entry" on>
+  <div class="hours-entry my-4">
     <h4>Hours</h4>
-    <button onclick="onHoursChange(-1)">-1</button>
-    <button onclick="onHoursChange(1)">+1</button>
+    <button
+      class="button is-danger is-outlined m-1"
+      on:click={() => adjustHours(-1)}>-1</button
+    >
+    <button
+      class="button is-success is-outlined m-1"
+      on:click={() => adjustHours(1)}>+1</button
+    >
   </div>
-  <div class="minutes-entry">
+  <div class="minutes-entry my-4">
     <h4>Minutes</h4>
-    <button onclick="onMinutesChange(-10)">-10</button>
-    <button onclick="onMinutesChange(-5)">-5</button>
-    <button onclick="onMinutesChange(-1)">-1</button>
-    <button onclick="onMinutesChange(1)">+1</button>
-    <button onclick="onMinutesChange(5)">+5</button>
-    <button onclick="onMinutesChange(10)">+10</button>
+    {#each MIN_SEC_INCREMENTS as inc}
+      <button
+        class="button is-outlined {inc > 0 ? 'is-success' : 'is-danger'} m-1"
+        on:click={() => adjustMinutes(inc)}
+      >
+        {inc > 0 ? "+" : ""}
+        {inc}
+      </button>
+    {/each}
   </div>
-  <div class="seconds-entry">
+  <div class="seconds-entry my-4">
     <h4>Seconds</h4>
-    <button onclick="onSecondsChange(-10)">-10</button>
-    <button onclick="onSecondsChange(-5)">-5</button>
-    <button onclick="onSecondsChange(-1)">-1</button>
-    <button onclick="onSecondsChange(1)">+1</button>
-    <button onclick="onSecondsChange(5)">+5</button>
-    <button onclick="onSecondsChange(10)">+10</button>
+    {#each MIN_SEC_INCREMENTS as inc}
+      <button
+        class="button is-outlined {inc > 0 ? 'is-success' : 'is-danger'} m-1"
+        on:click={() => adjustSeconds(inc)}
+      >
+        {inc > 0 ? "+" : ""}
+        {inc}
+      </button>
+    {/each}
   </div>
 </div>
