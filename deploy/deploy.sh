@@ -10,7 +10,7 @@ npm run build
 
 # nginx
 
-sudo ln -sf /home/brig/code/timekeeper/deploy/nginx.conf /etc/nginx/conf.d/timekeeper.conf
+sudo cp /home/brig/code/timekeeper/deploy/nginx.conf /etc/nginx/conf.d/timekeeper.conf
 
 sudo nginx -t
 sudo systemctl reload nginx
