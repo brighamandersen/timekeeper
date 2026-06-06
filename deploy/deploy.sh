@@ -5,12 +5,12 @@ echo "Deploying timekeeper"
 
 # frontend
 
-cd /home/brig/code/timekeeper/
+cd /home/brig/dev/timekeeper/
 npm run build
 
 # nginx
 
-sudo cp /home/brig/code/timekeeper/deploy/nginx.conf /etc/nginx/conf.d/timekeeper.conf
+sudo cp /home/brig/dev/timekeeper/deploy/nginx.conf /etc/nginx/conf.d/timekeeper.conf
 
 sudo nginx -t
 sudo systemctl reload nginx
